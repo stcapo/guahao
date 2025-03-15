@@ -1,0 +1,273 @@
+-- phpMyAdmin SQL Dump
+-- version 3.4.4
+-- http://www.phpmyadmin.net
+--
+-- 主机: localhost
+-- 生成日期: 2012 年 07 月 17 日 03:56
+-- 服务器版本: 5.1.30
+-- PHP 版本: 5.2.17
+use `guahao`;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- 数据库: `guahao`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_admin`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_admin` (
+  `uid` mediumint(9) NOT NULL,
+  `username` varchar(10) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT '1',
+  UNIQUE KEY `mid` (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `gh_admin`
+--
+
+INSERT INTO `gh_admin` (`uid`, `username`, `password`, `admin`) VALUES
+(1, 'admin', '698d51a19d8a121ce581499d7b701668', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_appoint`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_appoint` (
+  `aid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(20) NOT NULL,
+  `rid` smallint(6) NOT NULL,
+  `did` smallint(6) NOT NULL,
+  `day` varchar(10) NOT NULL,
+  `noon` varchar(6) NOT NULL,
+  `time` varchar(5) NOT NULL,
+  `state` smallint(1) NOT NULL,
+  `addtime` int(11) NOT NULL,
+  PRIMARY KEY (`aid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- 转存表中的数据 `gh_appoint`
+--
+
+INSERT INTO `gh_appoint` (`aid`, `uid`, `rid`, `did`, `day`, `noon`, `time`, `state`, `addtime`) VALUES
+(9, '10001001', 2, 3, '2012-06-28', '上午', '', 3, 1340716104),
+(10, '10001001', 2, 4, '2012-07-06', '上午', '09:00', 1, 1341468539);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_black`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_black` (
+  `ip` varchar(40) DEFAULT NULL,
+  `uid` int(11) NOT NULL DEFAULT '0',
+  `operate` int(11) NOT NULL,
+  `addtime` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_doctor`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_doctor` (
+  `did` smallint(6) NOT NULL AUTO_INCREMENT,
+  `rid` smallint(6) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  PRIMARY KEY (`did`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `gh_doctor`
+--
+
+INSERT INTO `gh_doctor` (`did`, `rid`, `name`, `type`) VALUES
+(5, 1, '孙乌鸡', '4'),
+(2, 2, '华佗', '3'),
+(3, 2, '李时珍', '4'),
+(4, 2, '许仙', '1');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_room`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_room` (
+  `rid` smallint(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `intro` text NOT NULL,
+  PRIMARY KEY (`rid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `gh_room`
+--
+
+INSERT INTO `gh_room` (`rid`, `name`, `intro`) VALUES
+(1, '泌尿内科', 'sss'),
+(2, '产科', ''),
+(3, '耳鼻咽喉科', ''),
+(4, '妇科', ''),
+(5, '骨科', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_schedule`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_schedule` (
+  `sid` int(11) NOT NULL AUTO_INCREMENT,
+  `rid` smallint(6) NOT NULL,
+  `did` smallint(6) NOT NULL,
+  `week` varchar(6) NOT NULL,
+  `noon` varchar(6) NOT NULL,
+  `limit` smallint(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`sid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+
+--
+-- 转存表中的数据 `gh_schedule`
+--
+
+INSERT INTO `gh_schedule` (`sid`, `rid`, `did`, `week`, `noon`, `limit`) VALUES
+(20, 2, 3, '周五', '下午', 5),
+(19, 2, 3, '周四', '上午', 3),
+(18, 2, 3, '周二', '下午', 4),
+(17, 2, 3, '周二', '上午', 2),
+(16, 2, 3, '周日', '上午', 2),
+(21, 2, 3, '周六', '上午', 4),
+(22, 2, 4, '周日', '上午', 4),
+(23, 2, 4, '周一', '上午', 5),
+(24, 2, 4, '周一', '下午', 4),
+(25, 2, 4, '周二', '上午', 6),
+(26, 2, 4, '周二', '下午', 3),
+(27, 2, 4, '周三', '上午', 7),
+(28, 2, 4, '周四', '上午', 8),
+(29, 2, 4, '周四', '下午', 4),
+(30, 2, 4, '周五', '上午', 9),
+(31, 2, 1, '周一', '上午', 3),
+(32, 2, 1, '周四', '下午', 5),
+(33, 2, 2, '周日', '下午', 5),
+(34, 2, 2, '周五', '上午', 5),
+(35, 1, 5, '周三', '上午', 3);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_session`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_session` (
+  `sid` varchar(6) NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  `uid` int(9) NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `checknum` varchar(10) NOT NULL,
+  `time` int(11) NOT NULL,
+  KEY `sid` (`sid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `gh_session`
+--
+
+INSERT INTO `gh_session` (`sid`, `ip`, `uid`, `admin`, `checknum`, `time`) VALUES
+('Wcwzv1', '127.0.0.1', 1, 1, '', 1342497266);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_setting`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_setting` (
+  `skey` varchar(30) NOT NULL,
+  `svalue` varchar(255) NOT NULL,
+  KEY `skey` (`skey`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `gh_setting`
+--
+
+INSERT INTO `gh_setting` (`skey`, `svalue`) VALUES
+('sitename', '中国人民医院'),
+('domain', '127.0.0.1'),
+('lifetime', '120'),
+('style', 'default'),
+('showexttime', '1'),
+('serviceTel', '021-88998888'),
+('serviceAdd', '上海市普陀区志丹路520号（志丹路沪太路口）'),
+('root', 'http://192.168.0.21:90'),
+('mailMethod', 'smtp'),
+('smtpCount', 'seetwo@qq.com'),
+('smtpPas', 'seetwo3010'),
+('smtpServer', 'smtp.qq.com'),
+('smtpPort', '25'),
+('serviceQQ', '173234188,305860337'),
+('appointDay', '8'),
+('autoupdate', '60'),
+('maxAppointTimes', '2'),
+('hospital', '中国医院'),
+('uidstart', '200000000'),
+('allow', 'doctor,add,3'),
+('notsafe', '%e8%af%b7%e8%81%94%e7%b3%bb%e4%bd%9c%e8%80%85%e8%b4%ad%e4%b9%b0%e6%ad%a3%e7%89%88%ef%bc%81');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `gh_user`
+--
+
+CREATE TABLE IF NOT EXISTS `gh_user` (
+  `uid` int(9) NOT NULL AUTO_INCREMENT,
+  `range` smallint(2) NOT NULL DEFAULT '0',
+  `id` varchar(20) NOT NULL,
+  `truename` varchar(20) NOT NULL,
+  `birthday` varchar(7) NOT NULL,
+  `gender` smallint(1) NOT NULL DEFAULT '1',
+  `type` varchar(20) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `tel` varchar(15) NOT NULL,
+  `mobile` varchar(11) NOT NULL,
+  `regIp` varchar(50) NOT NULL,
+  `addtime` int(11) NOT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=200000002 ;
+
+--
+-- 转存表中的数据 `gh_user`
+--
+
+INSERT INTO `gh_user` (`uid`, `range`, `id`, `truename`, `birthday`, `gender`, `type`, `address`, `tel`, `mobile`, `regIp`, `addtime`) VALUES
+(10001000, 0, '320411198511212219', '小曾', '1985-06', 1, '0', '很远很远的地方', '', '2147483647', '127.0.0.1', 1340246579),
+(10001001, 0, '320411198511212219', '小王', '2012-06', 1, '0', '润泽园', '', '15173190503', '127.0.0.1', 1340248136),
+(10001003, 0, '320411198511212219', '小笨笨', '2012-07', 0, '0', '说是', '', '15175895653', '', 0),
+(10001005, 0, '320411198511212219', '狎昵', '2012-07', 1, '0', '手受伤2', '', '15173190502', '127.0.0.1', 1341454489),
+(10001004, 0, '320411198511212219', '小亲戚', '2012-07', 1, '0', 'sss', '', '15214500009', '127.0.0.1', 1341453238),
+(200000000, 0, '320411198511212219', '小天', '2012-07', 1, '0', '天上', '', '15173190503', '127.0.0.1', 1341564561),
+(200000001, 0, '320411198511212219', '我勒个去', '2012-07', 1, '0', '手受伤', '', '15173190502', '127.0.0.1', 1341564590);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
